@@ -5,6 +5,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -25,10 +27,30 @@ public class Project {
     @Id
     @GeneratedValue
     private long id;
-    @ManyToMany(mappedBy = "projects")
+    @ManyToMany
+    @JoinTable(name = "STUDENTS_TABLE",
+        joinColumns = @JoinColumn(name = "project_id"),
+        inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<Student> students;
-    @Column(name = "topic")
+    @Column(name = "topic", unique = true)
     private String topic;
     @Column(name = "grade")
     private Integer grade;
+
+    public String getStudentsAsString() {
+        List<String> studentsString =
+            students.stream().map(x -> String.join(" ", x.getFirstName(), x.getLastName())).toList();
+        if (studentsString.isEmpty()) {
+            return "No students assigned yet";
+        }
+        return String.join(", ", studentsString);
+    }
+
+    public String getGradeAsString() {
+        if (grade != null) {
+            return grade.toString();
+        } else {
+            return "Not yet graded";
+        }
+    }
 }

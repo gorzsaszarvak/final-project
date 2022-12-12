@@ -4,7 +4,7 @@ import hu.unideb.inf.finalproject.project.exception.NoProjectsFoundException;
 import hu.unideb.inf.finalproject.project.exception.ProjectAlreadyExistsException;
 import hu.unideb.inf.finalproject.project.exception.ProjectNotFoundException;
 import hu.unideb.inf.finalproject.student.Student;
-import hu.unideb.inf.finalproject.student.exception.StudentNotFoundException;
+import hu.unideb.inf.finalproject.student.exception.NoStudentsFoundException;
 
 import java.util.List;
 
@@ -20,7 +20,10 @@ public interface ProjectService {
 
     Project findProjectById(Long projectId) throws ProjectNotFoundException;
 
-    List<Project> listProjectsByStudent(Student student) throws NoProjectsFoundException;
+    List<Project> listProjectsWithStudent(Student student) throws NoProjectsFoundException;
+
+    void deleteProjectById(Long projectId) throws ProjectNotFoundException;
 
 
+    void updateProject(Project project);
 }

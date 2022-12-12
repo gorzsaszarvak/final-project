@@ -1,5 +1,7 @@
-package hu.unideb.inf.finalproject.student.impl;
+package hu.unideb.inf.finalproject.student.exception.impl;
 
+import hu.unideb.inf.finalproject.project.Project;
+import hu.unideb.inf.finalproject.project.exception.NoProjectsFoundException;
 import hu.unideb.inf.finalproject.student.Student;
 import hu.unideb.inf.finalproject.student.StudentRepository;
 import hu.unideb.inf.finalproject.student.StudentService;
@@ -30,6 +32,15 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public void deleteStudentById(Long id) throws StudentNotFoundException {
+        if (studentRepository.existsById(id)) {
+            studentRepository.deleteById(id);
+        } else {
+            throw new StudentNotFoundException();
+        }
+    }
+
+    @Override
     public Student findStudentByName(String firstName, String lastName) {
         Optional<Student> student = studentRepository.findStudentByFirstNameAndLastName(firstName, lastName);
         if (student.isPresent()) {
@@ -56,6 +67,31 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> listStudents() throws NoStudentsFoundException {
         List<Student> students = studentRepository.findAll();
+        if (!students.isEmpty()) {
+            return students;
+        } else {
+            throw new NoStudentsFoundException();
+        }
+    }
+
+    @Override
+    public Student findStudentById(Long studentId) {
+        if (studentRepository.existsById(studentId)) {
+            return studentRepository.getReferenceById(studentId);
+        } else {
+            throw new StudentNotFoundException();
+        }
+    }
+
+    @Override
+    public void updateStudent(Student student){
+        studentRepository.save(student);
+    }
+
+    @Override
+    public List<Student> listStudentsWithProject(Project project)
+        throws StudentNotFoundException, NoProjectsFoundException {
+        List<Student> students = studentRepository.findAllByProjectsContaining(project);
         if(!students.isEmpty()) {
             return students;
         } else {

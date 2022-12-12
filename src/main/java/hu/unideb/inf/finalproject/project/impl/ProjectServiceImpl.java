@@ -83,13 +83,27 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<Project> listProjectsByStudent(Student student) throws NoProjectsFoundException {
+    public List<Project> listProjectsWithStudent(Student student) throws NoProjectsFoundException {
         List<Project> projects = projectRepository.findAllByStudentsContaining(student);
         if(!projects.isEmpty()) {
             return projects;
         } else {
             throw new NoProjectsFoundException();
         }
+    }
+
+    @Override
+    public void deleteProjectById(Long projectId) throws ProjectNotFoundException {
+        if(projectRepository.existsById(projectId)) {
+            projectRepository.deleteById(projectId);
+        } else {
+            throw new ProjectNotFoundException();
+        }
+    }
+
+    @Override
+    public void updateProject(Project project) {
+        projectRepository.save(project);
     }
 
 

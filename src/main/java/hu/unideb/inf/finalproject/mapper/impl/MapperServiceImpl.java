@@ -51,8 +51,8 @@ public class MapperServiceImpl implements MapperService {
 
     @Override
     public List<Project> getStudentProjects(Long studentId) throws StudentNotFoundException, NoProjectsFoundException {
-        Student student = studentService.findStudentsById(List.of(studentId)).get(0);
-        List<Project> projects = projectService.listProjectsByStudent(student);
+        Student student = studentService.findStudentById(studentId);
+        List<Project> projects = projectService.listProjectsWithStudent(student);
         return projects;
     }
 
