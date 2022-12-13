@@ -5,9 +5,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="col-4"/>
-    <div class="col-5 align-items-center">
-    <form id="login" name='f' th:action="@{/login}" method='POST'>
+    <form id="login" th:action="@{/login}" method='POST'>
         <h4 class="text-center">LOGIN</h4>
         <div class="form-outline mb-4">
             <input type="text" id="username" class="form-control" value='' required/>
@@ -18,9 +16,8 @@
             <label class="form-label" for="password">Password</label>
         </div>
         <input type="submit" class="btn btn-primary btn-block mb-4" name="submit" id="log" value="Sign in">
+<!--        todo: doesnt return to homepage-->
     </form>
-    </div>
-    <div class="col-4"/>
 </div>
 </body>
 </html>

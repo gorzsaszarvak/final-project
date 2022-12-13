@@ -1,5 +1,6 @@
 package hu.unideb.inf.finalproject.account;
 
+import hu.unideb.inf.finalproject.account.impl.AccountServiceImpl;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AccountsInitializer {
 
-    private final AccountService accountService;
+    private final AccountServiceImpl accountService;
 
     private final Account adminAccount = Account.builder()
         .userName("admin")
