@@ -7,6 +7,7 @@
 <th:block th:insert="~{navigationBar}"></th:block>
 <body>
 <div class="container" th:object="${project}">
+    <h2>EDIT PROJECT</h2>
     <form action="#" th:action="@{/projects/update/{id} (id=${project.id})}" method="post">
         <input type="hidden" th:field="*{id}">
         <div class="form-group">
