@@ -12,14 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class MapperController {
 
-    private final MapperService mapperService;
     private final StudentService studentService;
     private final ProjectService projectService;
 
@@ -32,8 +30,8 @@ public class MapperController {
         try {
             projects = projectService.listProjects();
         } catch (NoProjectsFoundException exception) {
-            //todo handle exception
             projects = List.of();
+            model.addAttribute("noProjectsException", exception.getMessage());
         }
         model.addAttribute("allProjects", projects);
 
@@ -41,7 +39,7 @@ public class MapperController {
     }
 
     @GetMapping("projects/{id}")
-    public String getProjectDetails(Model model, @PathVariable Long id) { //todo handle exception
+    public String getProjectDetails(Model model, @PathVariable Long id) {
         Project project = projectService.findProjectById(id);
         model.addAttribute("project", project);
 
@@ -49,8 +47,8 @@ public class MapperController {
         try {
             students = studentService.listStudents();
         } catch (NoStudentsFoundException exception) {
-            //todo handle exception
             students = List.of();
+            model.addAttribute("noStudentsException", exception.getMessage());
         }
         model.addAttribute("allStudents", students);
 

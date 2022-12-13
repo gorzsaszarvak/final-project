@@ -1,5 +1,6 @@
 package hu.unideb.inf.finalproject.project;
 
+import hu.unideb.inf.finalproject.project.exception.NoProjectsFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class ProjectController {
@@ -15,17 +18,22 @@ public class ProjectController {
     private final ProjectService projectService;
 
     @GetMapping("/projects")
-    public String listProjects(Model model) { //todo handle exception
+    public String listProjects(Model model) {
         Project project = new Project();
         model.addAttribute("project", project);
-        model.addAttribute("projects", projectService.listProjects());
+        try {
+            model.addAttribute("projects", projectService.listProjects());
+        } catch (NoProjectsFoundException exception) {
+            model.addAttribute("projects", List.of());
+            model.addAttribute("noProjectsException", exception.getMessage());
+        }
 
         return "projectsPage";
 
     }
 
     @PostMapping("/projects")
-    public String addProject(@ModelAttribute("project") Project project) { //todo handle exception
+    public String addProject(@ModelAttribute("project") Project project) {
         projectService.saveProject(project);
 
         return "redirect:/projects";

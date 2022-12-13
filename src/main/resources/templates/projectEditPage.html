@@ -15,7 +15,7 @@
         </div>
         <div class="form-group">
             <label for="grade">Grade</label>
-            <input id="grade" type="text" class="form-control" th:field="${project.grade}"/>
+            <input id="grade" type="number" class="form-control" th:field="${project.grade}"/>
         </div>
         <label for="studentsSelect">Assigned students</label>
         <div class="form-group">
@@ -25,6 +25,7 @@
                         th:text="${student.toString()}"/>
             </select>
         </div>
+        <p class="h4 text-center bg-warning" th:if="${noStudentsException}" th:text="${noStudentsException}">ERROR</p>
         <button type="submit" class="btn btn-primary">Update</button>
         <a th:href="@{/projects/delete/{id}(id=${project.id})}">
             <button type="button" class="btn btn-danger">Delete</button>
