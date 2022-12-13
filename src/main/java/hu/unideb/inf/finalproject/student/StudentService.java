@@ -1,7 +1,6 @@
 package hu.unideb.inf.finalproject.student;
 
 import hu.unideb.inf.finalproject.project.Project;
-import hu.unideb.inf.finalproject.project.exception.NoProjectsFoundException;
 import hu.unideb.inf.finalproject.student.exception.NoStudentsFoundException;
 import hu.unideb.inf.finalproject.student.exception.StudentAlreadyExistsException;
 import hu.unideb.inf.finalproject.student.exception.StudentNotFoundException;

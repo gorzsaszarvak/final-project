@@ -17,13 +17,24 @@
             <label for="lastName">Last name</label>
             <input id="lastName" type="text" class="form-control" th:field="${student.lastName}"/>
         </div>
-        <div class="form-group">
-            <label for="projectsSelect">Assigned projects</label>
-            <select id="projectsSelect" class="select" th:field="${student.projects}" multiple="multiple">
-                <option th:each="project : ${allProjects}"
-                        th:value="${{project}}"
-                        th:text="${project.topic}"/>
-            </select>
+        <div>
+            <label for="projectsTable">Assigned projects</label>
+            <table id="projectsTable" class="table table-sm">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">TOPIC</th>
+                    <th scope="col">GRADE</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="project : ${student.projects}">
+                    <td th:text="${project.id}"/>
+                    <td th:text="${project.topic}"/>
+                    <td th:text="${project.gradeAsString}"/>
+                </tr>
+                </tbody>
+            </table>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
         <a th:href="@{/students/delete/{id}(id=${student.id})}">

@@ -4,6 +4,7 @@ import hu.unideb.inf.finalproject.student.Student;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -17,7 +18,6 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "PROJECTS_TABLE")
 @Data
 @Builder
 @AllArgsConstructor
@@ -25,10 +25,10 @@ import java.util.List;
 public class Project {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @ManyToMany
-    @JoinTable(name = "STUDENTS_TABLE",
+    @JoinTable(name = "STUDENTS_PROJECTS",
         joinColumns = @JoinColumn(name = "project_id"),
         inverseJoinColumns = @JoinColumn(name = "student_id"))
     private List<Student> students;

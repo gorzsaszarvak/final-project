@@ -17,12 +17,12 @@
             <label for="grade">Grade</label>
             <input id="grade" type="text" class="form-control" th:field="${project.grade}"/>
         </div>
+        <label for="studentsSelect">Assigned students</label>
         <div class="form-group">
-            <label for="studentsSelect">Assigned projects</label>
             <select id="studentsSelect" class="select" th:field="${project.students}" multiple="multiple">
                 <option th:each="student : ${allStudents}"
                         th:value="${{student}}"
-                        th:text="${student.getName()}"/>
+                        th:text="${student.toString()}"/>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
