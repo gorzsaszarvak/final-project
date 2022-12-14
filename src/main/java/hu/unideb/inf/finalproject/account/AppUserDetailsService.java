@@ -30,10 +30,10 @@ public class AppUserDetailsService implements UserDetailsService {
         List<GrantedAuthority> roles = new ArrayList<>();
 
         if (user.get().getRole().equals(Role.ADMIN)) {
-            roles.add(new SimpleGrantedAuthority("ADMIN"));
-            roles.add(new SimpleGrantedAuthority("USER"));
+            roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            roles.add(new SimpleGrantedAuthority("ROLE_USER"));
         } else if (user.get().getRole().equals(Role.USER)) {
-            roles.add(new SimpleGrantedAuthority("USER"));
+            roles.add(new SimpleGrantedAuthority("ROLE_USER"));
         }
 
         return User.withUsername(user.get().getUserName())

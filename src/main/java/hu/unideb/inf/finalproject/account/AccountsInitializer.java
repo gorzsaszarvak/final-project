@@ -1,5 +1,6 @@
 package hu.unideb.inf.finalproject.account;
 
+import hu.unideb.inf.finalproject.account.exception.UsernameAlreadyExistsException;
 import hu.unideb.inf.finalproject.account.impl.AccountServiceImpl;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,16 @@ public class AccountsInitializer {
 
     @PostConstruct
     private void initialize() {
-        accountService.addAccount(adminAccount);
-        accountService.addAccount(userAccount);
+        try {
+            accountService.addAccount(adminAccount);
+        } catch (UsernameAlreadyExistsException ignored){
+            //Admin account already present in database
+        }
+        try {
+            accountService.addAccount(userAccount);
+        } catch (UsernameAlreadyExistsException ignored) {
+            //User account already present in database
+        }
+
     }
 }
