@@ -1,4 +1,4 @@
-package hu.unideb.inf.finalproject.mapper;
+package hu.unideb.inf.finalproject.details;
 
 import hu.unideb.inf.finalproject.project.Project;
 import hu.unideb.inf.finalproject.project.ProjectService;
@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
-public class MapperController {
+public class DetailsController {
 
     private final StudentService studentService;
     private final ProjectService projectService;
