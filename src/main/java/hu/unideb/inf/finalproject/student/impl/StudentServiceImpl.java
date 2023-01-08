@@ -1,4 +1,4 @@
-package hu.unideb.inf.finalproject.student.exception.impl;
+package hu.unideb.inf.finalproject.student.impl;
 
 import hu.unideb.inf.finalproject.student.Student;
 import hu.unideb.inf.finalproject.student.StudentRepository;
